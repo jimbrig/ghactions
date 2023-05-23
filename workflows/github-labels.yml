@@ -1,0 +1,18 @@
+name: GitHub Labels
+
+on:
+  - issues
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  labels:
+    name: ApplyLabels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: lannonbr/issue-label-manager-action@3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          delete: true

@@ -1,0 +1,25 @@
+name: Publish Docker to DockerHub
+on:
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+env:
+  DOCKER_IMAGE_NAME: "${{ github.repository_owner }}/${{ github.repository }}"
+  DOCKER_IMAGE_TAG: "latest"
+  DOCKER_USERNAME: ""
+  DOCKER_PASSWORD: ""
+
+jobs:
+  buildpush:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Publish to DockerHub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+          username: ${{ env.DOCKER_USERNAME }} # ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }} # ${{ secrets.DOCKER_PASSWORD }}

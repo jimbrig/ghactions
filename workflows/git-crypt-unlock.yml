@@ -1,0 +1,32 @@
+# Notes:
+# ---------------------------------------------------------------
+# GIT_CRYPT_KEY is the Base64-Encoded git-crypt key file
+#
+# You can generate/retrieve it with the following command:
+# > git-crypt export-key ./key && cat ./key | base64 | pbcopy && rm ./key
+# Then paste the key into a new secret named GIT_CRYPT_KEY in your repo
+# ---------------------------------------------------------------
+# Example Workflow:
+
+name: Unlock Git-Crypt
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  unlock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Unlock Git-Crypt
+        uses: sliteteam/github-action-git-crypt-unlock@1.2.0
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}

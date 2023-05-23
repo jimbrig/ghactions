@@ -1,0 +1,23 @@
+name: Publish GitHub Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+env:
+  RELEASE_TOKEN: ""
+  RELEASE_MESSAGE: "Release-v${{ github.ref }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create Release
+        uses: elgohr/Github-Release-Action@v4
+        env:
+          GITHUB_TOKEN: ${{ env.RELEASE_TOKEN }} # Cannot use secrets.GITHUB_TOKEN
+        with:
+          title: ${{ env.RELEASE_MESSAGE }} # Cannot contain spaces
