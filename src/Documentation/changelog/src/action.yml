@@ -1,0 +1,25 @@
+name: 'generate-changelog'
+description: "Generates CHANGELOG.md based off your repository's Git commit history via `git-cliff`."
+inputs:
+  config:
+    description: "config file location"
+    required: false
+    default: "cliff.toml"
+  args:
+    description: "git-cliff arguments"
+    required: false
+    default: "-v"
+outputs:
+  changelog:
+    description: "output file"
+  content:
+    description: "content of the changelog"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - --config=${{ inputs.config }}
+    - ${{ inputs.args }}
+branding:
+  icon: "triangle"
+  color: "green"
