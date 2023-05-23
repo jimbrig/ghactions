@@ -3,6 +3,12 @@
 > **Note**
 > Suite of GitHub Actions
 
+***
+
+[![Generate CHANGELOG.md](https://github.com/jimbrig/ghactions/actions/workflows/changelog.yml/badge.svg)](https://github.com/jimbrig/ghactions/actions/workflows/changelog.yml)
+
+***
+
 ## GitHub Actions
 
 - [GitHub Labels](src/GitHub/github-labels/): Customizes the repository's issue labels.
